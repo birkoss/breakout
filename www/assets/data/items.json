@@ -1,0 +1,47 @@
+{
+	"key": {
+		"frame": 137,
+		"name": "Golden Key",
+		"description": "Used to open door and chest"
+	},
+	"potion": {
+		"frame": 2,
+		"name": "Potion",
+		"description": "Give yourself some health back",
+		"usable": true,
+		"effects": [
+			{"type":"health", "amount": 10}
+		],
+		"identified": false
+	},
+	"apple": {
+		"frame": 308,
+		"name": "Apple",
+		"description": "Take this, you're not yourself when you're hungry",
+		"usable": true,
+		"effects": [
+			{"type":"hunger", "amount": 20}
+		]
+	},
+	"wooden_sword": {
+		"frame": 151,
+		"name": "Wooden Sword",
+		"description": "You are a king amonst mice",
+		"equipable": true,
+		"slot": "hand",
+		"effects": [
+			{"type":"damage", "amount": 1}
+		]
+	},
+	"steel_sword": {
+		"frame": 198,
+		"name": "Steel Sword",
+		"description": "This sword is a steal!",
+		"equipable": true,
+		"slot": "hand",
+		"effects": [
+			{"type":"damage", "amount": 2}
+		]
+	}
+
+}

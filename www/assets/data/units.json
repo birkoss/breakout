@@ -1,0 +1,19 @@
+{
+	"knight": {
+		"frames": [0, 18],
+		"health": 20,
+		"range": 3
+	},
+	"rat": {
+		"frames": [223, 241],
+		"health": 2
+	},
+	"ghost": {
+		"frames": [294, 312],
+		"health": 1
+	},
+	"skeleton": {
+		"frames": [290, 308],
+		"health": 3
+	}
+}
