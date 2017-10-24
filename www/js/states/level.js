@@ -117,7 +117,7 @@ GAME.Level.prototype.update = function() {
   this.game.physics.arcade.collide(this.paddle, this.balls, this.ballHitPaddle, null, this);
   this.game.physics.arcade.collide(this.balls, this.bricks, this.ballHitBrick, null, this);
   this.game.physics.arcade.collide(this.paddle, this.powerups, this.paddleHitPowerup, null, this);
-  this.game.physics.arcade.collide(this.balls, this.walls);
+  this.game.physics.arcade.collide(this.balls, this.walls, this.ballHitWall, null, this);
 
   if (this.playing) {
     let leftWall = this.walls.getChildAt(0);
@@ -167,6 +167,16 @@ GAME.Level.prototype.paddleHitPowerup = function(paddle, powerup) {
     console.log("paddleHitPowerup");
     //this.createBall();
     //this.paddle.width -= 20;
+};
+
+GAME.Level.prototype.ballHitWall = function(ball, wall) {
+    wall.tint = 0xcccccc;
+
+    let timer = this.game.time.create(this.game);
+    timer.add(250, function() {
+        wall.tint = 0xffffff;
+    }, this);
+    timer.start();
 };
 
 GAME.Level.prototype.ballHitBrick = function(ball, brick) {
