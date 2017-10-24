@@ -35,6 +35,29 @@ GAME.Level.prototype.create = function() {
     this.playing = true;
 
     this.initBricks();
+
+    this.walls = this.game.add.group();
+    let wall = this.walls.create(0, 0, "tile:blank");
+    wall.width = 10;
+    wall.height = this.game.height - 100;
+    wall.x = this.bricks.x - wall.width - 16;
+    this.game.physics.enable(wall, Phaser.Physics.ARCADE);
+    wall.body.immovable = true;
+
+    wall = this.walls.create(0, 0, "tile:blank");
+    wall.width = 10;
+    wall.height = this.game.height - 100;
+    wall.x = this.bricks.x + this.bricks.width - 16;   
+    this.game.physics.enable(wall, Phaser.Physics.ARCADE);
+    wall.body.immovable = true; 
+
+    wall = this.walls.create(0, 0, "tile:blank");
+    wall.width = this.bricks.width;
+    wall.height = 10;
+    wall.x = this.bricks.x - 16;
+    wall.y = 0;
+    this.game.physics.enable(wall, Phaser.Physics.ARCADE);
+    wall.body.immovable = true;
 };
 
 GAME.Level.prototype.createBall = function() {
@@ -49,7 +72,6 @@ GAME.Level.prototype.createBall = function() {
     ball.events.onOutOfBounds.add(this.ballLeaveScreen, this);
 
 
-    ball.body.collideWorldBounds = true;
     ball.body.bounce.set(1);
 
     ball.body.velocity.set(200, -200);
@@ -74,6 +96,7 @@ GAME.Level.prototype.initBricks = function() {
         for(let x=0; x<this.levels[0].length; x++) {
             let brickX = (x*brickSize.width);
             let brickY = (y*brickSize.height);
+            console.log(brickX + "x" + brickY);
             let brick = this.game.add.sprite(brickX, brickY, 'bricks');
             brick.frame = this.levels[y][x];
             this.game.physics.enable(brick, Phaser.Physics.ARCADE);
@@ -83,17 +106,23 @@ GAME.Level.prototype.initBricks = function() {
         }
     }
 
-    this.bricks.x = ((this.game.width - this.bricks.width) / 2) + brickSize.width/2;
-    this.bricks.y = (300 - this.bricks.height) / 2;
+    this.bricks.x = ((this.game.width - this.bricks.width) / 2) + (brickSize.width/2);
+
+    console.log(this.bricks.x);
+    //this.bricks.y = (300 - this.bricks.height) / 2;
+    this.bricks.y = 20;
 };
 
 GAME.Level.prototype.update = function() {
   this.game.physics.arcade.collide(this.paddle, this.balls, this.ballHitPaddle, null, this);
   this.game.physics.arcade.collide(this.balls, this.bricks, this.ballHitBrick, null, this);
   this.game.physics.arcade.collide(this.paddle, this.powerups, this.paddleHitPowerup, null, this);
+  this.game.physics.arcade.collide(this.balls, this.walls);
 
   if (this.playing) {
-    this.paddle.x = Math.max(Math.min(this.game.width-(this.paddle.width/2), this.game.input.x), this.paddle.width/2) || this.game.world.width*0.5;
+    let leftWall = this.walls.getChildAt(0);
+    let rightWall = this.walls.getChildAt(1);
+    this.paddle.x = Math.max(Math.min(rightWall.x-(this.paddle.width/2), this.game.input.x), leftWall.x + 10 + 16 + 10) || this.game.world.width*0.5;
   }
 };
 
