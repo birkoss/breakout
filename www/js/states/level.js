@@ -41,13 +41,15 @@ GAME.Level.prototype.create = function() {
     wall.width = 10;
     wall.height = this.game.height - 100;
     wall.x = this.bricks.x - wall.width - 16;
+    wall.y = 30;
     this.game.physics.enable(wall, Phaser.Physics.ARCADE);
     wall.body.immovable = true;
 
     wall = this.walls.create(0, 0, "tile:blank");
     wall.width = 10;
     wall.height = this.game.height - 100;
-    wall.x = this.bricks.x + this.bricks.width - 16;   
+    wall.x = this.bricks.x + this.bricks.width - 16; 
+    wall.y = 30;  
     this.game.physics.enable(wall, Phaser.Physics.ARCADE);
     wall.body.immovable = true; 
 
@@ -55,7 +57,7 @@ GAME.Level.prototype.create = function() {
     wall.width = this.bricks.width;
     wall.height = 10;
     wall.x = this.bricks.x - 16;
-    wall.y = 0;
+    wall.y = 30;
     this.game.physics.enable(wall, Phaser.Physics.ARCADE);
     wall.body.immovable = true;
 };
@@ -110,7 +112,7 @@ GAME.Level.prototype.initBricks = function() {
 
     console.log(this.bricks.x);
     //this.bricks.y = (300 - this.bricks.height) / 2;
-    this.bricks.y = 20;
+    this.bricks.y = 50;
 };
 
 GAME.Level.prototype.update = function() {
@@ -180,6 +182,8 @@ GAME.Level.prototype.ballHitWall = function(ball, wall) {
 };
 
 GAME.Level.prototype.ballHitBrick = function(ball, brick) {
+    brick.tint = 0xff0000;
+    return;
     var killTween = this.game.add.tween(brick.scale);
     killTween.to({x:0,y:0}, 200, Phaser.Easing.Linear.None);
     killTween.onComplete.addOnce(function(){

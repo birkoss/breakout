@@ -11,7 +11,7 @@ GAME.Preload.prototype.preload = function() {
     this.load.image('tile:blank', 'assets/images/blank.png');
     this.load.image('hover', 'assets/images/hover.png');
     //this.load.image('ball', 'assets/images/ball.png');
-    this.game.load.spritesheet('ball', 'assets/images/wobble.png', 11, 11);
+    this.game.load.spritesheet('ball', 'assets/images/wobble.png', 12, 12);
     this.game.load.spritesheet('bricks', 'assets/images/bricks.png', 32, 20);
     this.load.image('paddle', 'assets/images/paddle.png');
     this.load.image('brick', 'assets/images/brick.png');
